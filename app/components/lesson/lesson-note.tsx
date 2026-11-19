@@ -31,6 +31,8 @@ export function LessonNote({
   const fetcher = useFetcher<{ ok: boolean; error?: string }>();
   const isSaving = fetcher.state !== "idle";
   const error = fetcher.data?.error;
+  // Seeded once per mount: FullLesson keys this card by lesson, so moving to
+  // another lesson resets the draft instead of saving it onto the wrong one.
   const [body, setBody] = useState(note?.body ?? "");
   const length = noteLengthStatus(body);
 
