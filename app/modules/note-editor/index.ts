@@ -8,9 +8,8 @@ export type { NoteLengthStatus, NoteLengthTone } from "./lib/length-status";
  * the most the save action accepts, and whether that is close to, or over,
  * the limit.
  */
-export function noteLengthStatus(
-  body: string,
-  max: number = MAX_NOTE_LENGTH
-): NoteLengthStatus {
-  return lengthStatus(body.length, max);
+export function noteLengthStatus(body: string): NoteLengthStatus {
+  // Measure what saveNote measures (app/lib/notes.server.ts), so the counter
+  // never shows "over" for a note that would save, or the reverse.
+  return lengthStatus(body.trim().length, MAX_NOTE_LENGTH);
 }
